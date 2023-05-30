@@ -31,6 +31,7 @@ function addContact(event) {
 function saveContacts() {
   contactString = JSON.stringify(contacts)
   window.localStorage.setItem("contacts", contactString)
+  drawContacts()
 }
 
 /**
@@ -51,6 +52,18 @@ function loadContacts() {
  * contacts in the contacts array
  */
 function drawContacts() {
+  let contactList = document.getElementById("contact-list")
+  let contactsTemplate = ""
+  contacts.forEach(contact => {
+    contactsTemplate+=`
+    <div class="contact-card ${contact.ice ? 'emergency-contact' : ''}">
+      <h3>${contact.name}</h3>
+      <p>${contact.phone}</p>
+      <button type="button" onclick="removeContact('${contact.id}')">remove</button>
+    </div>
+    `
+  })
+  contactList.innerHTML = contactsTemplate
 }
 
 /**
