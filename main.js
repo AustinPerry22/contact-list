@@ -76,12 +76,26 @@ function drawContacts() {
  * @param {string} contactId 
  */
 function removeContact(contactId) {
+  let index = contacts.findIndex(contacts => contacts.id === contactId)
+  if(index == -1){
+    throw new Error("Invalid Contact Id")
+  }
+  contacts.splice(index,1)
+  saveContacts()
 }
 
 /**
  * Toggles the visibility of the AddContact Form
  */
 function toggleAddContactForm() {
+  let form = document.getElementById("new-contact-form")
+  if(form.classList.contains("hidden") == true){
+    console.log("show")
+    form.classList.remove("hidden")
+  }else{
+    console.log("hide")
+    form.classList.add("hidden")
+  }
 }
 
 
